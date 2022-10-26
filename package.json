@@ -1,0 +1,14 @@
+{
+  "name": "figma-plugin",
+  "version": "1.0.0",
+  "description": "Your Figma Plugin",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "yarn build -- --watch"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "1.54.1",
+    "typescript": "4.8.4"
+  }
+}
