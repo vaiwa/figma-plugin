@@ -2,13 +2,15 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["es6"],
-    "skipLibCheck": true,
     "rootDir": "./",
     "outDir": "./lib/",
     "moduleResolution": "node",
     "typeRoots": [
       "node_modules/@types",
       "node_modules/@figma"
-    ]
-  }
+    ],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+  },
+  "include": ["code.ts"]
 }

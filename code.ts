@@ -1,4 +1,5 @@
-// import * as Clipboard from 'clipboard'
+// import Clipboard from 'clipboard'
+import _ from 'lodash'
 
 // This plugin will open a window to prompt the user to enter a number, and
 // it will then create that many rectangles on the screen.
@@ -7,7 +8,7 @@
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (see documentation).
 
-// console.log(this)
+console.log('THIS', this)
 
 console.info('CurrentPage Selection', figma.currentPage.selection)
 
@@ -38,9 +39,12 @@ figma.ui.onmessage = (msg) => {
       c: 'HELLO',
     }
 
-    console.info('HERE HERE HERE')
+    // console.info('HERE HERE HERE', Clipboard)
 
-    // const clipBoard = new Clipboard(JSON.stringify(data))
+    console.info('LODASH', _.toUpper('Hello There'))
+
+    // const clipBoard = new Clipboard('HELLO')
+    // console.info('HERE HERE HERE', clipBoard)
     // clipBoard.on('success', (e: unknown) => {
     //   console.info('Clipboard Success', e)
     //   //   this.onCopied(e)
@@ -51,3 +55,5 @@ figma.ui.onmessage = (msg) => {
   // keep running, which shows the cancel button at the bottom of the screen.
   figma.closePlugin()
 }
+
+// export {}

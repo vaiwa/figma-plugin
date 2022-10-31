@@ -4,15 +4,18 @@
   "description": "Your Figma Plugin",
   "main": "code.js",
   "scripts": {
-    "clean": "rimraf ./node_modules ./lib",
-    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf ./node_modules ./lib ./dist",
+    "compile": "tsc -p tsconfig.json",
+    "build": "yarn compile && esbuild code.ts --sourcemap --bundle --outfile=dist/code.js",
     "watch": "yarn build -- --watch"
   },
   "dependencies": {
-    "clipboard": "2.0.11"
+    "clipboard": "2.0.11",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@figma/plugin-typings": "1.54.1",
+    "esbuild": "0.15.12",
     "rimraf": "^3.0.2",
     "typescript": "4.8.4"
   }
