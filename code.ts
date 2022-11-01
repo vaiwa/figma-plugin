@@ -10,10 +10,12 @@ import _ from 'lodash'
 
 console.log('THIS', this)
 
-console.info('CurrentPage Selection', figma.currentPage.selection)
-
 // This shows the HTML page in "ui.html".
 figma.showUI(__html__)
+
+const sendSelectionchange = () => figma.ui.postMessage({ type: 'selectionchange', data: figma.currentPage.selection })
+figma.on('selectionchange', () => sendSelectionchange())
+sendSelectionchange() // initial send
 
 // Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
@@ -21,39 +23,41 @@ figma.showUI(__html__)
 figma.ui.onmessage = (msg) => {
   // One way of distinguishing between different types of messages sent from
   // your HTML page is to use an object with a "type" property like this.
-  if (msg.type === 'create-rectangles') {
-    // const nodes: SceneNode[] = [];
-    // for (let i = 0; i < msg.count; i++) {
-    //   const rect = figma.createRectangle();
-    //   rect.x = i * 150;
-    //   rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.5, b: 0 } }];
-    //   figma.currentPage.appendChild(rect);
-    //   nodes.push(rect);
-    // }
-    // figma.currentPage.selection = nodes;
-    // figma.viewport.scrollAndZoomIntoView(nodes);
 
-    const data = {
-      a: true,
-      b: 1,
-      c: 'HELLO',
-    }
-
-    // console.info('HERE HERE HERE', Clipboard)
-
-    console.info('LODASH', _.toUpper('Hello There'))
-
-    // const clipBoard = new Clipboard('HELLO')
-    // console.info('HERE HERE HERE', clipBoard)
-    // clipBoard.on('success', (e: unknown) => {
-    //   console.info('Clipboard Success', e)
-    //   //   this.onCopied(e)
-    // })
+  if (msg.type === 'close') {
+    // Make sure to close the plugin when you're done. Otherwise the plugin will
+    // keep running, which shows the cancel button at the bottom of the screen.
+    figma.closePlugin()
+    return
   }
 
-  // Make sure to close the plugin when you're done. Otherwise the plugin will
-  // keep running, which shows the cancel button at the bottom of the screen.
-  figma.closePlugin()
+  // const nodes: SceneNode[] = [];
+  // for (let i = 0; i < msg.count; i++) {
+  //   const rect = figma.createRectangle();
+  //   rect.x = i * 150;
+  //   rect.fills = [{ type: "SOLID", color: { r: 1, g: 0.5, b: 0 } }];
+  //   figma.currentPage.appendChild(rect);
+  //   nodes.push(rect);
+  // }
+  // figma.currentPage.selection = nodes;
+  // figma.viewport.scrollAndZoomIntoView(nodes);
+
+  const data = msg.data ?? {
+    a: true,
+    b: 1,
+    c: 'HELLO',
+  }
+
+  console.info('DATA:', data)
+
+  console.info('LODASH:', _.toUpper('Hello There'))
+
+  // const clipBoard = new Clipboard('HELLO')
+  // console.info('HERE HERE HERE', clipBoard)
+  // clipBoard.on('success', (e: unknown) => {
+  //   console.info('Clipboard Success', e)
+  //   //   this.onCopied(e)
+  // })
 }
 
 // export {}

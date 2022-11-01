@@ -1,20 +1,39 @@
-<h2>Rectangle Creator</h2>
-<p>Count: <input id="count" value="5"></p>
-<button id="create">Create</button>
+<h2>Squid Plugin</h2>
+
+<button id="copy" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">Copy to clipboard</button>
 <button id="cancel">Cancel</button>
-<button class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">Copy to clipboard</button>
+<br>
+<p>Selection count:</p>
+<p class="text">init</p>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-<script>new ClipboardJS('.btn')</script>
+<script>new ClipboardJS('#copy')</script>
 <script>
 
-document.getElementById('create').onclick = () => {
-  const textbox = document.getElementById('count');
-  const count = parseInt(textbox.value, 10);
-  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-}
+  document.getElementById('copy').onclick = () => {
+    const data = 'TODO DATA' // TODO
+    parent.postMessage({ pluginMessage: { type: 'copy', data } }, '*')
+  }
 
-document.getElementById('cancel').onclick = () => {
-  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
-}
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
+  }
+
+  onmessage = (event) => {
+    const message = event.data.pluginMessage
+
+    console.info('message', message)
+
+
+    if(message.type === 'selectionchange') {
+
+      const selectionLength = message.data?.length
+
+      const textElem = document.getElementsByClassName("text")[0]
+      textElem.innerText = selectionLength
+
+    }
+
+  }
 
 </script>
