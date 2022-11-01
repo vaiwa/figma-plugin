@@ -12,11 +12,11 @@
 
   document.getElementById('copy').onclick = () => {
     const data = 'TODO DATA' // TODO
-    parent.postMessage({ pluginMessage: { type: 'copy', data } }, '*')
+    parent.postMessage({ pluginMessage: { action: 'copy', data } }, '*')
   }
 
   document.getElementById('cancel').onclick = () => {
-    parent.postMessage({ pluginMessage: { type: 'close' } }, '*')
+    parent.postMessage({ pluginMessage: { action: 'close' } }, '*')
   }
 
   onmessage = (event) => {
@@ -25,7 +25,7 @@
     console.info('message', message)
 
 
-    if(message.type === 'selectionchange') {
+    if(message.action === 'selectionchange') {
 
       const selectionLength = message.data?.length
 

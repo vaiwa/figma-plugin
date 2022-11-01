@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["es6"],
-    "rootDir": "./",
+    "rootDir": "./src",
     "outDir": "./lib/",
     "moduleResolution": "node",
     "typeRoots": [
@@ -11,6 +11,5 @@
     ],
     "skipLibCheck": true,
     "esModuleInterop": true,
-  },
-  "include": ["code.ts"]
+  }
 }

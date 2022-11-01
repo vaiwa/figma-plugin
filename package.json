@@ -5,9 +5,8 @@
   "main": "code.js",
   "scripts": {
     "clean": "rimraf ./node_modules ./lib ./dist",
-    "compile": "tsc -p tsconfig.json",
-    "build": "yarn compile && esbuild code.ts --sourcemap --bundle --outfile=dist/code.js",
-    "watch": "yarn build -- --watch"
+    "build": "esbuild src/code.ts --sourcemap --bundle --outfile=dist/code.js",
+    "watch": "tsc --watch --noEmit"
   },
   "dependencies": {
     "clipboard": "2.0.11",
