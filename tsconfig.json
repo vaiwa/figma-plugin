@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["es6"],
-    "rootDir": "./src",
+    "target": "ES2019",
+    "lib": ["ES2019"],
     "outDir": "./lib/",
     "moduleResolution": "node",
     "typeRoots": [
@@ -11,5 +10,7 @@
     ],
     "skipLibCheck": true,
     "esModuleInterop": true,
-  }
+    "resolveJsonModule": true,
+  },
+  "include": [ "./src", "./package.json" ],
 }
