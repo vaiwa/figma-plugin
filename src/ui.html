@@ -11,6 +11,23 @@
 <script>new ClipboardJS('#copy')</script>
 <script>
 
+// const eventListeners: { type: String; callback: Function }[] = [];
+// export const dispatch = (action: String, data?: any) => {
+// 	parent.postMessage({ pluginMessage: { action, data } }, '*');
+// };
+// export const handleEvent = (type: String, callback: Function) => {
+// 	eventListeners.push({ type, callback });
+// };
+// window.onmessage = event => {
+// 	const message = event.data.pluginMessage;
+// 	if (message) {
+// 		for (let eventListener of eventListeners) {
+// 	 	if (message.action === eventListener.type) eventListener.callback(message.data);
+// 		}
+// 	}
+// };
+
+
   document.getElementById('copy').onclick = () => {
     const data = 'TODO DATA' // TODO
     parent.postMessage({ pluginMessage: { action: 'copy', data } }, '*')
@@ -19,6 +36,18 @@
   document.getElementById('cancel').onclick = () => {
     parent.postMessage({ pluginMessage: { action: 'close' } }, '*')
   }
+
+
+  window.onfocus = () => {
+    console.info('ON FOCUS')
+  }
+
+  window.onblur = () => {
+    console.info('ON BLUR')
+  }
+
+  // window.onfocus = () => dispatch("windowFocus", true);
+  // window.onblur = () => dispatch("windowFocus", false);
 
   onmessage = (event) => {
     const message = event.data.pluginMessage
